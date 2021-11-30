@@ -902,7 +902,7 @@
         }
       }
     },
-    ".NETFramework,Version=v4.6.1/win7-x86": {
+    ".NETFramework,Version=v4.6.1/win10-x64": {
       "AvalonEdit/5.0.3": {
         "type": "package",
         "compile": {
@@ -2720,7 +2720,12 @@
             "version": "[20.6.0-preview, 20.6.0-preview]"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Users\\thpower\\AppData\\Local\\UiPath\\app-21.4.3\\runtime.json"
+        "runtimeIdentifierGraphPath": "C:\\Users\\thpower\\AppData\\Local\\Programs\\UiPath\\Studio\\runtime.json"
+      }
+    },
+    "runtimes": {
+      "win10-x64": {
+        "#import": []
       }
     }
   }

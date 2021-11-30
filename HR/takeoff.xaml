@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="takeoff" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1397,2747" sap2010:WorkflowViewState.IdRef="takeoff_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="takeoff" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="816,2750" sap2010:WorkflowViewState.IdRef="takeoff_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -58,10 +58,10 @@
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
       <AssemblyReference>UiPath.CV</AssemblyReference>
       <AssemblyReference>UiPath.Mail</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="takeoff" sap:VirtualizedContainerService.HintSize="493,2582" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="takeoff" sap:VirtualizedContainerService.HintSize="493,2685" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="dt" />
     </Sequence.Variables>
@@ -70,7 +70,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="451,260" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_2" WorkbookPath="6月HR系统考勤数据.xlsx">
+    <ui:ExcelApplicationScope Password="{x:Null}" DisplayName="Excel Application Scope" sap:VirtualizedContainerService.HintSize="451,260" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_2" WorkbookPath="11月HR系统考勤数据(1).xlsx">
       <ui:ExcelApplicationScope.Body>
         <ActivityAction x:TypeArguments="ui:WorkbookApplication">
           <ActivityAction.Argument>
@@ -82,7 +82,7 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:ExcelReadRange AddHeaders="True" DataTable="[dt]" DisplayName="Read Range" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="ExcelReadRange_2" SheetName="TakeOff">
+            <ui:ExcelReadRange AddHeaders="True" DataTable="[dt]" DisplayName="Read Range" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="ExcelReadRange_2" SheetName="06-出勤-TakeOff （考勤）">
               <ui:ExcelReadRange.Range>
                 <InArgument x:TypeArguments="x:String">
                   <Literal x:TypeArguments="x:String" Value="" />
@@ -99,13 +99,13 @@
         </ActivityAction>
       </ui:ExcelApplicationScope.Body>
     </ui:ExcelApplicationScope>
-    <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[dt]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="451,2190" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+    <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[dt]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="451,2293" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
       <ui:ForEachRow.Body>
         <ActivityAction x:TypeArguments="sd:DataRow">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="401,2039" sap2010:WorkflowViewState.IdRef="Sequence_4">
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="401,2142" sap2010:WorkflowViewState.IdRef="Sequence_4">
             <Sequence.Variables>
               <Variable x:TypeArguments="s:DateTime" Name="dateM" />
               <Variable x:TypeArguments="s:DateTime" Name="datetimeend" />
@@ -147,12 +147,13 @@
                 <InArgument x:TypeArguments="s:DateTime">[datetimestart.ParseExact( row("月份").ToString,"MM/dd/yyyy hh:mm:ss",System.Globalization.CultureInfo.InvariantCulture)]</InArgument>
               </Assign.Value>
             </Assign>
+            <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="359,63" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[row(&quot;姓名&quot;).ToString]" />
             <Assign sap:VirtualizedContainerService.HintSize="359,61" sap2010:WorkflowViewState.IdRef="Assign_2">
               <Assign.To>
                 <OutArgument x:TypeArguments="s:DateTime">[datetimestart]</OutArgument>
               </Assign.To>
               <Assign.Value>
-                <InArgument x:TypeArguments="s:DateTime">[datetimestart.ParseExact( row("开始时间").ToString,"MM/dd/yyyy hh:mm:ss",System.Globalization.CultureInfo.InvariantCulture)]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime">[datetimestart.ParseExact( row("具体日期").ToString,"MM/dd/yyyy hh:mm:ss",System.Globalization.CultureInfo.InvariantCulture)]</InArgument>
               </Assign.Value>
             </Assign>
             <Assign sap:VirtualizedContainerService.HintSize="359,61" sap2010:WorkflowViewState.IdRef="Assign_3">
@@ -160,10 +161,10 @@
                 <OutArgument x:TypeArguments="s:DateTime">[datetimeend]</OutArgument>
               </Assign.To>
               <Assign.Value>
-                <InArgument x:TypeArguments="s:DateTime">[datetimestart.ParseExact( row("结束时间").ToString,"MM/dd/yyyy hh:mm:ss",System.Globalization.CultureInfo.InvariantCulture)]</InArgument>
+                <InArgument x:TypeArguments="s:DateTime">[datetimestart.ParseExact( row("具体日期").ToString,"MM/dd/yyyy hh:mm:ss",System.Globalization.CultureInfo.InvariantCulture)]</InArgument>
               </Assign.Value>
             </Assign>
-            <ui:TypeInto AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type Into 'INPUT  Title_fa564e0f-0...'" sap:VirtualizedContainerService.HintSize="359,134" sap2010:WorkflowViewState.IdRef="TypeInto_1" Text="[row(&quot;姓名&quot;).ToString]">
+            <ui:TypeInto AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type Into 'INPUT  Title_fa564e0f-0...'" sap:VirtualizedContainerService.HintSize="359,134" sap2010:WorkflowViewState.IdRef="TypeInto_1" SendWindowMessages="True" Text="[row(&quot;姓名&quot;).ToString]">
               <ui:TypeInto.Target>
                 <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="50d573ae-a124-40c2-b773-83b718f8b97a" InformativeScreenshot="ac9e19ae93d6317e9d6c875a575ef380" Selector="&lt;html app='msedge.exe' title='06-出勤-TakeOff - 新建项目' /&gt;&lt;webctrl id='Title_fa564e0f-0c70-4ab9-b863-0177e6ddd247_$TextField' tag='INPUT' type='text' /&gt;">
                   <ui:Target.TimeoutMS>
@@ -175,7 +176,7 @@
                 </ui:Target>
               </ui:TypeInto.Target>
             </ui:TypeInto>
-            <ui:TypeInto AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type Into 'INPUT '" sap:VirtualizedContainerService.HintSize="359,134" sap2010:WorkflowViewState.IdRef="TypeInto_2" Text="[dateM.ToString(&quot;yyyy年M月&quot;)]">
+            <ui:TypeInto AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type Into 'INPUT '" sap:VirtualizedContainerService.HintSize="359,134" sap2010:WorkflowViewState.IdRef="TypeInto_2" SendWindowMessages="True" Text="[dateM.ToString(&quot;yyyy年M月&quot;)]">
               <ui:TypeInto.Target>
                 <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="ede88b2e-2805-439d-b8de-c46a04e4bc80" InformativeScreenshot="0a7a8b3571cb5903f3f92ca31e83fa90" Selector="&lt;html app='msedge.exe' title='06-出勤-TakeOff - 新建项目' /&gt;&lt;webctrl id='_x6708__x4efd__6f359073-ee45-4c7e-8108-1d0e1063fcbf_$TextField' tag='INPUT' type='text' /&gt;">
                   <ui:Target.TimeoutMS>
@@ -187,7 +188,7 @@
                 </ui:Target>
               </ui:TypeInto.Target>
             </ui:TypeInto>
-            <ui:TypeInto AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type Into 'INPUT '" sap:VirtualizedContainerService.HintSize="359,134" sap2010:WorkflowViewState.IdRef="TypeInto_7" Text="[row(&quot;编号&quot;).ToString]">
+            <ui:TypeInto AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type Into 'INPUT '" sap:VirtualizedContainerService.HintSize="359,134" sap2010:WorkflowViewState.IdRef="TypeInto_7" SendWindowMessages="True" Text="[row(&quot;编号&quot;).ToString]">
               <ui:TypeInto.Target>
                 <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="ede88b2e-2805-439d-b8de-c46a04e4bc80" InformativeScreenshot="ae3525f227cf0f1ab794375ea136c4c7" Selector="&lt;html app='msedge.exe' title='06-出勤-TakeOff - 新建项目' /&gt;&lt;webctrl id='_x804c__x5de5__x7f16__x53f7__5887246a-b808-40d9-ba80-f3115a6b4f0*' tag='INPUT' type='text' /&gt;">
                   <ui:Target.TimeoutMS>
@@ -217,7 +218,7 @@
                 </ui:Target>
               </ui:SelectItem.Target>
             </ui:SelectItem>
-            <ui:TypeInto AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type Into 'INPUT '" sap:VirtualizedContainerService.HintSize="359,134" sap2010:WorkflowViewState.IdRef="TypeInto_4" Text="[datetimestart.ToString(&quot;yyyy/MM/dd&quot;)]">
+            <ui:TypeInto AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type Into 'INPUT '" sap:VirtualizedContainerService.HintSize="359,134" sap2010:WorkflowViewState.IdRef="TypeInto_4" SendWindowMessages="True" Text="[datetimestart.ToString(&quot;yyyy/MM/dd&quot;)]">
               <ui:TypeInto.Target>
                 <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="475cb3e5-afbe-460b-b3a9-85c22bc50c0d" InformativeScreenshot="7c9dba490bb27890cf923afce96d5478" Selector="&lt;html app='msedge.exe' title='06-出勤-TakeOff - 新建项目' /&gt;&lt;webctrl id='_x65e5__x671f__x8d77__afa49ed0-fa71-4081-8a36-e3c5ce9557e7_$Date*' tag='INPUT' type='text' /&gt;">
                   <ui:Target.TimeoutMS>
@@ -229,7 +230,7 @@
                 </ui:Target>
               </ui:TypeInto.Target>
             </ui:TypeInto>
-            <ui:TypeInto AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type Into 'INPUT '" sap:VirtualizedContainerService.HintSize="359,134" sap2010:WorkflowViewState.IdRef="TypeInto_5" Text="[datetimeend.ToString(&quot;yyyy/MM/dd&quot;)]">
+            <ui:TypeInto AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type Into 'INPUT '" sap:VirtualizedContainerService.HintSize="359,134" sap2010:WorkflowViewState.IdRef="TypeInto_5" SendWindowMessages="True" Text="[datetimeend.ToString(&quot;yyyy/MM/dd&quot;)]">
               <ui:TypeInto.Target>
                 <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="c60b9d11-f11e-4da6-8a75-d3f56e3fc6dc" InformativeScreenshot="5e6c3b5902bc85fe210e17bfdcb25436" Selector="&lt;html app='msedge.exe' title='06-出勤-TakeOff - 新建项目' /&gt;&lt;webctrl id='_x65e5__x671f__x6b62__201f4c0c-c420-4282-b91e-e3aa35e0d51e_$Date*' tag='INPUT' type='text' /&gt;">
                   <ui:Target.TimeoutMS>
@@ -241,7 +242,7 @@
                 </ui:Target>
               </ui:TypeInto.Target>
             </ui:TypeInto>
-            <ui:TypeInto AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type Into 'INPUT '" sap:VirtualizedContainerService.HintSize="359,134" sap2010:WorkflowViewState.IdRef="TypeInto_6" Text="[row(&quot;请假天数&quot;).ToString]">
+            <ui:TypeInto AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type Into 'INPUT '" sap:VirtualizedContainerService.HintSize="359,134" sap2010:WorkflowViewState.IdRef="TypeInto_6" Text="[row(&quot;天数&quot;).ToString]">
               <ui:TypeInto.Target>
                 <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="76218d82-bb34-4f57-ace4-c321bd92e8c1" InformativeScreenshot="50cff4b21e238f21e500494fa9ce35b3" Selector="&lt;html app='msedge.exe' title='06-出勤-TakeOff - 新建项目' /&gt;&lt;webctrl id='_x5929__x6570__aa3ba041-d3f2-404d-baa1-b899ab79604d_$NumberField' tag='INPUT' type='text' /&gt;">
                   <ui:Target.TimeoutMS>
@@ -253,7 +254,7 @@
                 </ui:Target>
               </ui:TypeInto.Target>
             </ui:TypeInto>
-            <ui:TypeInto AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type Into 'INPUT '" sap:VirtualizedContainerService.HintSize="359,134" sap2010:WorkflowViewState.IdRef="TypeInto_8" Text="20">
+            <ui:TypeInto AlterIfDisabled="{x:Null}" ClickBeforeTyping="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" EmptyField="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" DisplayName="Type Into 'INPUT '" sap:VirtualizedContainerService.HintSize="359,134" sap2010:WorkflowViewState.IdRef="TypeInto_8" Text="[row(&quot;扣除比例&quot;).ToString]">
               <ui:TypeInto.Target>
                 <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="76218d82-bb34-4f57-ace4-c321bd92e8c1" InformativeScreenshot="e08bc3e0a211635134a2093fee59c2e7" Selector="&lt;html app='msedge.exe' title='06-出勤-TakeOff - 新建项目' /&gt;&lt;webctrl id='_x65e5__x85aa__x6bd4__x4f8b__081739ae-1187-4320-983c-9241e245658*' tag='INPUT' type='text' /&gt;">
                   <ui:Target.TimeoutMS>
@@ -277,7 +278,7 @@
                 </ui:CursorPosition>
               </ui:Click.CursorPosition>
               <ui:Click.Target>
-                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="9ca2e2af-a3ce-4a61-9ca5-00527a8ab6a0" InformativeScreenshot="95946d35779ccdd36f5c616ea0d05087" Selector="&lt;html app='msedge.exe' title='06-出勤-TakeOff - 新建项目' /&gt;&lt;webctrl aaname='保存' css-selector='body&amp;gt;form&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;table&amp;gt;tbody&amp;gt;tr&amp;gt;td&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;table&amp;gt;tbody&amp;gt;tr&amp;gt;td&amp;gt;span&amp;gt;table&amp;gt;tbody&amp;gt;tr&amp;gt;td&amp;gt;table&amp;gt;tbody&amp;gt;tr&amp;gt;td&amp;gt;table&amp;gt;tbody&amp;gt;tr&amp;gt;td&amp;gt;input' tag='INPUT' type='button' /&gt;">
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="9ca2e2af-a3ce-4a61-9ca5-00527a8ab6a0" InformativeScreenshot="4063a6601ea21ac8b18ec6130cd723d3" Selector="&lt;html app='msedge.exe' title='06-出勤-TakeOff - 新建项目' /&gt;&lt;webctrl aaname='保存' css-selector='body&amp;gt;form&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;table&amp;gt;tbody&amp;gt;tr&amp;gt;td&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;div&amp;gt;table&amp;gt;tbody&amp;gt;tr&amp;gt;td&amp;gt;span&amp;gt;table&amp;gt;tbody&amp;gt;tr&amp;gt;td&amp;gt;table&amp;gt;tbody&amp;gt;tr&amp;gt;td&amp;gt;table&amp;gt;tbody&amp;gt;tr&amp;gt;td&amp;gt;input' tag='INPUT' type='button' /&gt;">
                   <ui:Target.TimeoutMS>
                     <InArgument x:TypeArguments="x:Int32" />
                   </ui:Target.TimeoutMS>
